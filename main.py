@@ -11,7 +11,6 @@ class MainPage(webapp2.RequestHandler):
                 cursor.execute("SELECT * FROM testTable");
                 results = cursor.fetchall()
                 cursor.close()
-                print(results)
-                self.response.write("gahaaahahahahah")
+                self.response.write(results)
 
 app = webapp2.WSGIApplication([("/", MainPage),], debug=True)
