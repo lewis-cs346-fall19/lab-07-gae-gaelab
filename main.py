@@ -17,7 +17,7 @@ class MainPage(webapp2.RequestHandler):
             self.response.set_cookie('cookie', new_session_id, max_age=1800)
             cursor.execute("INSERT INTO sessions (session_id, user_name) VALUES (%s, %s);", (new_session_id, 'user_name'))
             conn.commit()
-            q = "SELECT user_name FROM sessions WHERE session_id=%s;", new_session_id
+            q = "'SELECT user_name FROM sessions WHERE session_id=%s;', new_session_id"
 
         cursor.execute(q);
         results = cursor.fetchall()
