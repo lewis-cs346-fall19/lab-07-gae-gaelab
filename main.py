@@ -23,7 +23,7 @@ class MainPage(webapp2.RequestHandler):
 
     def post(self):
 
-        user_name = sefl.request.get("user_name")
+        user_name = self.request.get("user_name")
         if user_name == "":
             self.redirect("/")
         else:
