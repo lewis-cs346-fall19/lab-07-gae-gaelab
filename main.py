@@ -5,7 +5,7 @@ class MainPage(webapp2.RequestHandler):
     def get(self):
         self.response.headers["Content-Type"] = "text/html"
 
-        increment = "<p><form action='/' method='get'><input type=hidden value=1><input type='submit' value='Increment'/></form>"
+        increment = "<p><form action='/' method='get'><input type='hidden' name='value' value=1><input type='submit' value='Increment'/></form>"
 
         cookie = self.request.cookies.get("csc346gae")
 
