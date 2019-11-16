@@ -5,7 +5,7 @@ class MainPage(webapp2.RequestHandler):
 		
         self.response.headers["Content-Type"] = "text/html"
         conn = MySQLdb.connect(unix_socket = passwords.SQL_HOST, user = passwords.SQL_USER, passwd = passwords.SQL_PASSWD,db = 'lab7')
-            cursor = conn.cursor()
+        cursor = conn.cursor()
         cookie = self.request.cookies.get("cookie_name")
 
         if cookie:    
