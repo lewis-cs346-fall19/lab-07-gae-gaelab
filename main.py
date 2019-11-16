@@ -2,10 +2,9 @@ import webapp2, MySQLdb, passwords
 from random import getrandbits
 
 class MainPage(webapp2.RequestHandler):
-    
-    self.response.headers["Content-Type"] = "text/html"
 
     def get(self):
+        self.response.headers["Content-Type"] = "text/html"
 
         increment = "<p><form action='/' method='post'><input type=hidden value=1><input type='submit' value='Increment'/></form>"
 
