@@ -16,7 +16,7 @@ class MainPage(webapp2.RequestHandler):
             #get user_name
             cursor.execute("SELECT user_name FROM sessions WHERE session_id=%s;",(cookie,))
             results = cursor.fetchall()
-            user_name = str(results[0][0])
+            user_name = results[0][0]
 
             if self.request.get("value"):
 
@@ -35,7 +35,7 @@ class MainPage(webapp2.RequestHandler):
         
             value = results[0][0]
             self.response.write("Hello " + user_name + ".\n") 
-            self.response.write("Your current value is " + value + ".\n")
+            self.response.write("Your current value is " + str(value) + ".\n")
             self.response.write("Press the increment button to increase it by one!")  
             self.response.write(increment) 
                 
