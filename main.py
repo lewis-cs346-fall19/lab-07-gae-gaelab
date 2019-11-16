@@ -21,6 +21,6 @@ class MainPage(webapp2.RequestHandler):
         cursor.execute(q);
         results = cursor.fetchall()
         cursor.close()
-        self.response.write("Hello " + str(results[1]))    
+        self.response.write("Hello " + str(results))    
 
 app = webapp2.WSGIApplication([("/", MainPage),], debug=True)
