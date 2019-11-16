@@ -3,11 +3,9 @@ from random import getrandbits
 
 class MainPage(webapp2.RequestHandler):
     
-    create_user_name = "<p> Welcome, please create a user name to continue<br><form method='post'>Create User Name: <input type='text' name='user_name'><input type='submit' value='Create'/></form>"
-    
-    increment = "<p><form action=self.redirect('/') method='post'><input type=hidden value=1><input type='submit' value='Increment'/></form>"
-
     def get(self):
+
+        increment = "<p><form action=self.redirect('/') method='post'><input type=hidden value=1><input type='submit' value='Increment'/></form>"
         
         self.response.headers["Content-Type"] = "text/html"
 
@@ -25,6 +23,9 @@ class MainPage(webapp2.RequestHandler):
             self.response.write(increment) 
                 
         else:
+
+            create_user_name = "<p> Welcome, please create a user name to continue<br><form method='post'>Create User Name: <input type='text' name='user_name'><input type='submit' value='Create'/></form>"
+            
             self.response.write(create_user_name)
 
         
