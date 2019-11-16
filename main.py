@@ -3,7 +3,7 @@ from random import getrandbits
 
 create_user_name = "<form method='post'>Create User Name: <input type='text' name='user_name'><input type='submit' value='Create'/></form>"
 
-increment = "<form method='post'>"
+increment = "<form method='post'><input type='submit' value='Increment'/></form>"
 
 class MainPage(webapp2.RequestHandler):
     def get(self):
@@ -13,7 +13,8 @@ class MainPage(webapp2.RequestHandler):
         cookie = self.request.cookies.get("csc346gae")
 
         if cookie:   
-            
+            conn = MySQLdb.connect(unix_socket = passwords.SQL_HOST, user = passwords.SQL_USER, passwd = passwords.SQL_PASSWD,db = 'lab7')
+            cursor = conn.cursor()
             cursor.execute("SELECT user_name FROM sessions WHERE session_id=%s;",(cookie,))
             results = cursor.fetchall()
             self.response.write("Hello " + str(results))    
