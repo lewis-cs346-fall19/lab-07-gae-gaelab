@@ -54,16 +54,24 @@ class MainPage(webapp2.RequestHandler):
         else:
             conn = MySQLdb.connect(unix_socket = passwords.SQL_HOST, user = passwords.SQL_USER, passwd = passwords.SQL_PASSWD,db = 'lab7')
             cursor = conn.cursor()
+            cursor.execute("SELECT COUNT(id) FROM users WHERE id=%s",(user_name,))
+            if int(cursor.fetchall()[0][0]) < 1:
 
-            new_session_id = "%032x" % getrandbits(128)
-            self.response.set_cookie(key='csc346gae', value=new_session_id, max_age=1800,)
+                conn = MySQLdb.connect(unix_socket = passwords.SQL_HOST, user = passwords.SQL_USER, passwd = passwords.SQL_PASSWD,db = 'lab7')
+                cursor = conn.cursor()
 
-            cursor.execute("INSERT INTO sessions (session_id, user_name) VALUES (%s, %s);", (new_session_id, user_name))
-            conn.commit()
-            cursor.execute("INSERT INTO users (id, value) VALUES (%s, %s);", (user_name, 0)),
-            conn.commit()
-            conn.close()
-            self.redirect("/")
+                new_session_id = "%032x" % getrandbits(128)
+                self.response.set_cookie(key='csc346gae', value=new_session_id, max_age=1800,)
 
+                cursor.execute("INSERT INTO sessions (session_id, user_name) VALUES (%s, %s);", (new_session_id, user_name))
+                conn.commit()
+                cursor.execute("INSERT INTO users (id, value) VALUES (%s, %s);", (user_name, 0)),
+                conn.commit()
+                conn.close()
+                self.redirect("/")
+            else:
+                name_taken = "<p> Sorry, that user name is taken. Please create a user name to continue<br><form method='post'>Create User Name: <input type='text' name='user_name'><input type='submit' value='Create'/></form>"
+
+                self.response.write(name_taken)
 
 app = webapp2.WSGIApplication([("/", MainPage),], debug=True)
