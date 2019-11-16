@@ -22,7 +22,7 @@ class MainPage(webapp2.RequestHandler):
             cursor.execute("SELECT user_name FROM sessions WHERE session_id=%s;",(new_session_id,))
 
         results = cursor.fetchall()
-        cursor.close()
         self.response.write("Hello " + str(results[0][0]))    
+        conn.close()
 
 app = webapp2.WSGIApplication([("/", MainPage),], debug=True)
