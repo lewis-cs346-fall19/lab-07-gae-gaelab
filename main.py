@@ -21,7 +21,7 @@ class MainPage(webapp2.RequestHandler):
             user_name = results[0][0]
             value = int(results[0][1])
             self.response.write("Hello " + user_name) 
-            self.response.write("Your current value is " + value + ". Press the increment button to increase it by one!")  
+            self.response.write("Your current value is " + str(value) + ". Press the increment button to increase it by one!")  
             self.response.write(increment) 
                 
         else:
