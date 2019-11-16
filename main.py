@@ -2,7 +2,6 @@ import webapp2, MySQLdb, passwords
 from random import getrandbits
 
 class MainPage(webapp2.RequestHandler):
-
     def get(self):
         self.response.headers["Content-Type"] = "text/html"
 
@@ -60,7 +59,7 @@ class MainPage(webapp2.RequestHandler):
 
             cursor.execute("INSERT INTO sessions (session_id, user_name) VALUES (%s, %s);", (new_session_id, user_name))
             conn.commit()
-            cursor.execute("INSERT INTO users (id, value) VALUES (%s);", (user_name, 0))
+            cursor.execute("INSERT INTO users (id, value) VALUES (%s);", (user_name, "0"))
             conn.commit()
             conn.close()
             self.redirect("/")
