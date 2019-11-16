@@ -14,7 +14,7 @@ class MainPage(webapp2.RequestHandler):
                 
         else:
             session_id = "%032x" % getrandbits(128)
-            self.response.set_cookie(cookie, session_id, max_age=1800)
+            self.response.set_cookie('cookie', session_id, max_age=1800)
             cursor.execute("INSERT INTO sessions (session_id, user_name) VALUES (session_id, 'user_name');")
             q = "SELECT user_name FROM sessions;"
 
