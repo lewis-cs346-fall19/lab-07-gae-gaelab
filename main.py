@@ -37,7 +37,7 @@ class MainPage(webapp2.RequestHandler):
             self.response.write("Hello " + user_name + ".\n") 
             self.response.write("Your current value is ")
             self.response.write(value)
-            self.response.write("Press the increment button to increase it by one!")  
+            self.response.write(".\nPress the increment button to increase it by one!")  
             self.response.write(increment) 
                 
         else:
