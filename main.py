@@ -10,14 +10,14 @@ class MainPage(webapp2.RequestHandler):
         cookie = self.request.cookies.get("cookie_name")
 
         if cookie:    
-            cursor.execute("SELECT user_name FROM sessions WHERE session_id=%s;",cookie)
+            cursor.execute("SELECT user_name FROM sessions WHERE session_id=%s;"(,cookie))
                 
         else:
             new_session_id = "%032x" % getrandbits(128)
             self.response.set_cookie('cookie', new_session_id, max_age=1800)
             cursor.execute("INSERT INTO sessions (session_id, user_name) VALUES (%s, %s);", (new_session_id, 'user_name'))
             conn.commit()
-            cursor.execute("SELECT user_name FROM sessions WHERE session_id=%s;", new_session_id)
+            cursor.execute("SELECT user_name FROM sessions WHERE session_id=%s;",(new_session_id,))
 
         results = cursor.fetchall()
         cursor.close()
