@@ -5,7 +5,7 @@ class MainPage(webapp2.RequestHandler):
     
     create_user_name = "<p> Welcome, please create a user name to continue<br><form method='post'>Create User Name: <input type='text' name='user_name'><input type='submit' value='Create'/></form>"
     
-    increment = "<p><form action=" + self.redirect('/') + " method='post'><input type=hidden value=1><input type='submit' value='Increment'/></form>"
+    increment = "<p><form action=self.redirect('/') method='post'><input type=hidden value=1><input type='submit' value='Increment'/></form>"
 
     def get(self):
         
