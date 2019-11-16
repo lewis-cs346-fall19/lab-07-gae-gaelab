@@ -1,7 +1,9 @@
 import webapp2, MySQLdb, passwords
 from random import getrandbits
 
-create_user_name = "<form method='get'>Create User Name: <input type='text' name='user_name'><input type='submit' value='Create'/></form>"
+create_user_name = "<form method='post'>Create User Name: <input type='text' name='user_name'><input type='submit' value='Create'/></form>"
+
+increment = "<form method='post'>"
 
 class MainPage(webapp2.RequestHandler):
     def get(self):
@@ -11,10 +13,11 @@ class MainPage(webapp2.RequestHandler):
         cookie = self.request.cookies.get("csc346gae")
 
         if cookie:   
-            self.response.write(cookie) 
+            
             cursor.execute("SELECT user_name FROM sessions WHERE session_id=%s;",(cookie,))
             results = cursor.fetchall()
             self.response.write("Hello " + str(results))    
+
                 
         else:
             self.response.write(create_user_name)
