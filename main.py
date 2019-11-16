@@ -37,7 +37,7 @@ class MainPage(webapp2.RequestHandler):
             new_session_id = "%032x" % getrandbits(128)
             self.response.set_cookie(key='csc346gae', value=new_session_id, max_age=1800,)
 
-            cursor.execute("INSERT INTO sessions (session_id, user_name) VALUES (%s, %s);", (new_session_id, 'user_name'))
+            cursor.execute("INSERT INTO sessions (session_id, user_name) VALUES (%s, %s);", (new_session_id, user_name))
             conn.commit()
             conn.close()
             self.redirect("/")
