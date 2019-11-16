@@ -13,11 +13,11 @@ class MainPage(webapp2.RequestHandler):
             q = "SELECT user_name FROM sessions;"
                 
         else:
-            session_id = "%032x" % getrandbits(128)
+            new_session_id = "%032x" % getrandbits(128)
             self.response.set_cookie('cookie', session_id, max_age=1800)
-            cursor.execute("INSERT INTO sessions (session_id, user_name) VALUES (session_id, 'user_name');")
+            cursor.execute("INSERT INTO sessions (session_id, user_name) VALUES (%s, %s);", (new_session_id, 'user_name'))
             conn.commit()
-            q = "SELECT user_name FROM sessions;"
+            q = "SELECT user_name FROM sessions WHERE session_id=%s;", new_session_id
 
         cursor.execute(q);
         results = cursor.fetchall()
