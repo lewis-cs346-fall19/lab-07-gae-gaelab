@@ -10,7 +10,7 @@ class MainPage(webapp2.RequestHandler):
         cookie = self.request.cookies.get("cookie_name")
 
         if cookie:    
-            cursor.execute("SELECT user_name FROM sessions WHERE session_id=%s;"(,cookie))
+            cursor.execute("SELECT user_name FROM sessions WHERE session_id=%s;",(cookie,))
                 
         else:
             new_session_id = "%032x" % getrandbits(128)
