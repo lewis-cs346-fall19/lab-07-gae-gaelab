@@ -16,9 +16,10 @@ class MainPage(webapp2.RequestHandler):
             cursor.execute("SELECT user_name FROM sessions WHERE session_id=%s;",(cookie,))
                 
         else:
-            self.response.write("I did not find a cookie")
+            self.response.write("<form method='post'>Create User Name: <input type='text' name='user_name'><input type='submit' value='Create'/></form>")
             new_session_id = "%032x" % getrandbits(128)
             self.response.set_cookie(key='cookie_name', value=new_session_id, max_age=1800,)
+
             cursor.execute("INSERT INTO sessions (session_id, user_name) VALUES (%s, %s);", (new_session_id, 'user_name'))
             conn.commit()
             cursor.execute("SELECT user_name FROM sessions WHERE session_id=%s;",(new_session_id,))
@@ -26,5 +27,7 @@ class MainPage(webapp2.RequestHandler):
         results = cursor.fetchall()
         self.response.write("Hello " + str(results))    
         conn.close()
+
+
 
 app = webapp2.WSGIApplication([("/", MainPage),], debug=True)
