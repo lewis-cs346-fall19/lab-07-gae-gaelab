@@ -34,9 +34,9 @@ class MainPage(webapp2.RequestHandler):
             results = cursor.fetchall()
         
             value = results[0][0]
-            self.response.write("Hello " + user_name + ".\n") 
+            self.response.write("Hello " + str(user_name) + ".\n") 
             self.response.write("Your current value is ")
-            self.response.write(value)
+            self.response.write(str(value))
             self.response.write(".\nPress the increment button to increase it by one!")  
             self.response.write(increment) 
                 
