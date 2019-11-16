@@ -3,7 +3,7 @@ from random import getrandbits
 
 create_user_name = "<p> Welcome, please create a user name to continue<br><form method='post'>Create User Name: <input type='text' name='user_name'><input type='submit' value='Create'/></form>"
 
-increment = "<form method='post'><input type='submit' value='Increment'/></form>"
+increment = "<p><form method='post'><input type='submit' value='Increment'/></form>"
 
 class MainPage(webapp2.RequestHandler):
     def get(self):
@@ -19,8 +19,8 @@ class MainPage(webapp2.RequestHandler):
             results = cursor.fetchall()
             user_name = results[0][0]
             value = results[0][1]
-            self.response.write("Hello " + str(results))    
-
+            self.response.write("Hello " + str(results))   
+            self.response.write(increment) 
                 
         else:
             self.response.write(create_user_name)
