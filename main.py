@@ -1,7 +1,7 @@
 import webapp2, MySQLdb, passwords
 
 class MainPage(webapp2.RequestHandler):
-	def get(self):
+    def get(self):
         
         self.response.headers["Content-Type"] = "text/html"
         conn = MySQLdb.connect(unix_socket = passwords.SQL_HOST, user = passwords.SQL_USER, passwd = passwords.SQL_PASSWD,db = 'lab7')
@@ -14,7 +14,7 @@ class MainPage(webapp2.RequestHandler):
         else:
             session_id = "%032x" % random.getrandbits(128)
             self.response.set_cookie(cookie, session_id, max_age=1800)
-            cursor.execute("INSERT INTO sessions (session_id, user_name) VALUES (session_id, "user_name");")
+            cursor.execute("INSERT INTO sessions (session_id, user_name) VALUES (session_id, 'user_name');")
             q = "SELECT user_name FROM sessions;"
 
         cursor.execute(q);
