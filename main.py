@@ -16,7 +16,7 @@ class MainPage(webapp2.RequestHandler):
             #get user_name
             cursor.execute("SELECT user_name FROM sessions WHERE session_id=%s;",(cookie,))
             results = cursor.fetchall()
-            user_name = results[0][0]
+            user_name = str(results[0][0])
 
             if self.request.get("value"):
 
