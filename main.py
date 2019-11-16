@@ -23,7 +23,7 @@ class MainPage(webapp2.RequestHandler):
                 #get current value associated with user and increment
                 cursor.execute("SELECT value FROM users WHERE id=%s;",(user_name,))
                 results = cursor.fetchall()
-                new_value = int(self.request.get("value")) + int(results[0,0])
+                new_value = int(self.request.get("value")) + int(results[0][0])
 
                 #update value
                 cursor.execute("UPDATE users SET value=%s WHERE id=%s;",(new_value, user_name))
@@ -34,7 +34,7 @@ class MainPage(webapp2.RequestHandler):
             results = cursor.fetchall()
         
             value = results[0][0]
-            self.response.write("Hello " + str(user_name) + ".\n") 
+            self.response.write("Hello " + user_name + ".\n") 
             self.response.write("Your current value is ")
             self.response.write(str(value))
             self.response.write(".\nPress the increment button to increase it by one!")  
